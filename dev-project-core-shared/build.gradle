@@ -1,0 +1,47 @@
+/**
+ * Properties
+ */
+sourceCompatibility = 1.6
+//name = 'dev-project-core-shared'
+group = 'in.v8Delta.shared.core'
+version = '1.0'
+
+
+apply plugin: 'java'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+/**
+ *Publishing To Maven
+ *
+ */
+apply plugin: 'maven-publish'
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourceJar {
+                classifier 'sources'
+            }
+        }
+    }
+    repositories {
+        maven {
+            credentials {
+                username 'test'
+                password 'test'
+            }
+            url 'http://nexus-testsuren.rhcloud.com/nexus/content/repositories/test/'
+        }
+    }
+}

@@ -1,0 +1,2 @@
+include ':my-proj-ui-web'
+include ':my-proj-ui-mobile'

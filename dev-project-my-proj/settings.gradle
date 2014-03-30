@@ -1,0 +1,6 @@
+include ':my-proj-core'
+include ':my-proj-dao'
+include ':my-proj-models'
+include ':my-proj-services'
+include ':my-proj-web'
+include ':my-proj-ui'

@@ -1,0 +1,4 @@
+rootProject.name = 'dev-project-root'
+
+include 'dev-project-core-shared'
+include 'dev-project-web-shared'
