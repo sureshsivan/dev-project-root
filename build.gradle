@@ -1,9 +1,33 @@
-apply plugin: 'java'
+
+//https://github.com/hibernate/hibernate-orm/blob/master/build.gradle
+https://github.com/hibernate/hibernate-orm/blob/master/settings.gradle
+https://github.com/spring-projects/spring-framework/blob/master/build.gradle
+https://github.com/groovy/groovy-core/tree/master/subprojects
+https://github.com/groovy/groovy-core/tree/master/subprojects
+https://github.com/gradle/gradle/blob/master/settings.gradle#L55
+https://github.com/Qi4j/qi4j-core
+https://github.com/mockito/mockito
+
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
 sourceCompatibility = 1.5
 version = '1.0'
 
-repositories {
-    mavenCentral()
+allprojects {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+
+        maven {
+            name 'jboss-nexus'
+            url "http://repository.jboss.org/nexus/content/groups/public/"
+        }
+        maven {
+            name "jboss-snapshots"
+            url "http://snapshots.jboss.org/maven2/"
+        }
+    }
 }
 
 dependencies {

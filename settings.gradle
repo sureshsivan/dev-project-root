@@ -1,4 +1,16 @@
 rootProject.name = 'dev-project-root'
 
+
+
 include 'dev-project-core-shared'
 include 'dev-project-web-shared'
+
+include 'metamodel-generator'
+project(':metamodel-generator').projectDir = new File(rootProject.projectDir, "tooling/metamodel-generator")
+
+rootProject.children.each { project ->
+    project.buildFileName = "${project.name}.gradle"
+    assert project.projectDir.isDirectory()
+    assert project.buildFile.exists()
+    assert project.buildFile.isFile()
+}
