@@ -1,0 +1,146 @@
+//https://github.com/griffon/griffon/blob/master/gradle/maven.gradle
+apply plugin: 'maven'
+
+configurations {
+    deployerJars
+}
+
+dependencies {
+    deployerJars 'org.apache.maven.wagon:wagon-webdav:1.0-beta-2',
+            'org.apache.maven:maven-ant-tasks:2.1.0'
+}
+
+def installer = install.repositories.mavenInstaller
+def deployer = null
+
+
+uploadArchives {
+    repositories {
+        deployer = mavenDeployer {
+            name = 'repositoryDeployer'
+            configuration = configurations.deployerJars
+            uploadDescriptor = true
+            repository(url: codehausReleaseUrl) {
+                authentication(userName: codehausUsername, password: codehausPassword)
+            }
+//            snapshotRepository(url: codehausSnapshotUrl) {
+//                uniqueVersion = false
+//                authentication(userName: codehausUsername, password: codehausPassword)
+//            }
+        }
+    }
+}
+
+[installer, deployer].each { repo ->
+    configure(repo) {
+        pom.project {
+            name(project.name)
+            groupId()
+            artifactId()
+//            packaging()
+            description(project.pomDescription)
+            url('http://v8-delta.in')
+            inceptionYear '2014'
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                url projectSourceCodeUrl
+            }
+            ciManagement {
+                system { projectCiSystem }
+                url { projectCiUrl }
+            }
+            issueManagement {
+                system { projectIssueManagementSystem }
+                url { projectIssueManagementUrl }
+            }
+            developers {
+                [
+                    {
+                        id { 'suresh.sivanantham' }
+                        name { 'Suresh Sivanantham' }
+                        email { 'suresh.sivanantham@gmail.com' }
+                    },
+                    {
+                        id { 'suresh.siva' }
+                        name { 'Suresh Sivanantham Personal' }
+                        email { 'cliksuresh18@gmail.com' }
+                    }
+                ].each { developer ->
+                    developer {
+                        id developer.id
+                        name developer.name
+                        email developer.email
+                        roles {
+                            role 'Developer'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+//apply plugin: "propdeps-maven"
+//
+//install {
+//    repositories.mavenInstaller {
+//        customizePom(pom, project)
+//    }
+//}
+//
+//def customizePom(pom, gradleProject) {
+//    pom.whenConfigured { generatedPom ->
+//        // eliminate test-scoped dependencies (no need in maven central poms)
+//        generatedPom.dependencies.removeAll { dep ->
+//            dep.scope == "test"
+//        }
+//
+//        // sort to make pom dependencies order consistent to ease comparison of older poms
+//        generatedPom.dependencies = generatedPom.dependencies.sort { dep ->
+//            "$dep.scope:$dep.groupId:$dep.artifactId"
+//        }
+//
+//        // add all items necessary for maven central publication
+//        generatedPom.project {
+//            name = gradleProject.description
+//            description = gradleProject.description
+//            url = "https://github.com/spring-projects/spring-framework"
+//            organization {
+//                name = "Spring IO"
+//                url = "http://projects.spring.io/spring-framework"
+//            }
+//            licenses {
+//                license {
+//                    name "The Apache Software License, Version 2.0"
+//                    url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+//                    distribution "repo"
+//                }
+//            }
+//            scm {
+//                url = "https://github.com/spring-projects/spring-framework"
+//                connection = "scm:git:git://github.com/spring-projects/spring-framework"
+//                developerConnection = "scm:git:git://github.com/spring-projects/spring-framework"
+//            }
+//            developers {
+//                developer {
+//                    id = "jhoeller"
+//                    name = "Juergen Hoeller"
+//                    email = "jhoeller@gopivotal.com"
+//                }
+//            }
+//            issueManagement {
+//                system = "Jira"
+//                url = "https://jira.springsource.org/browse/SPR"
+//            }
+//        }
+//    }
+//}

@@ -2,9 +2,14 @@ rootProject.name = 'devProjectRoot'
 include 'devProjectCoreShared'
 include 'devProjectWebShared'
 
+//https://github.com/hibernate/hibernate-orm/blob/master/settings.gradle
+include 'metamodel-generator'
+project(':metamodel-generator').projectDir = new File(rootProject.projectDir, "tooling/metamodel-generator")
+project(':metamodel-generator').name = 'hibernate-jpamodelgen'
+
 rootProject.children.each { project ->
     String fileBaseName = project.name.replaceAll("\\p{Upper}") { "-${it.toLowerCase()}" }
-    String projectDirName = "subprojects/$fileBaseName"
+    String projectDirName = "$projectDir/$fileBaseName"
     project.projectDir = new File(settingsDir, projectDirName)
     project.buildFileName = "${fileBaseName}.gradle"
     assert project.projectDir.isDirectory()
