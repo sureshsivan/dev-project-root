@@ -1,5 +1,8 @@
-rootProject.name = 'dev-project-root-shared'
+rootProject.name = 'dev-project-root'
 include 'dev-project-core-shared'
+include 'dev-project-web-shared'
+//project(':dev-project-core-shared').version = devProjectCoreSharedVersion
+
 //include 'dev-project-web-shared'
 
 //https://github.com/hibernate/hibernate-orm/blob/master/settings.gradle
@@ -8,13 +11,8 @@ include 'dev-project-core-shared'
 //project(':metamodel-generator').name = 'hibernate-jpamodelgen'
 
 rootProject.children.each { project ->
-//    String fileBaseName = project.name.replaceAll("\\p{Upper}") { "-${it.toLowerCase()}" }
-//    String fileBaseName = project.name
     String projectDirName = "$project.projectDir"
-//    project.projectDir = new File(settingsDir, projectDirName)
     project.buildFileName = "${project.name}.gradle"
-    println project.projectDir
-    println project.buildFileName
     assert project.projectDir.isDirectory()
     assert project.buildFile.isFile()
 }
