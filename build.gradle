@@ -1,3 +1,14 @@
+import java.text.SimpleDateFormat
+Date buildTimeAndDate = new Date()
+ext {
+    buildDate = new SimpleDateFormat('dd-MMM-yyyy').format(buildTimeAndDate)
+    buildTime = new SimpleDateFormat('hh:mm aa z').format(buildTimeAndDate)
+}
+
+
+//task platformBuild(dependsOn: [project(':coreProject').build]){
+//    description : "Makes build only for the platform Projects"
+//}
 
 //https://github.com/hibernate/hibernate-orm/blob/master/build.gradle
 //https://github.com/hibernate/hibernate-orm/blob/master/settings.gradle
@@ -12,7 +23,7 @@
 //apply plugin: 'idea'
 
 sourceCompatibility = 1.5
-version = '1.0'
+version = projectVersion
 
 allprojects {
     repositories {
@@ -26,37 +37,9 @@ allprojects {
             url 'http://nexus-testsuren.rhcloud.com/nexus/content/repositories/test/'
         }
     }
-
-    /**
-     *Publishing To Maven
-     *
-     */
-    apply plugin: 'maven-publish'
-    task sourceJar(type: Jar) {
-        from sourceSets.main.allJava
-    }
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                from components.java
-                artifact sourceJar {
-                    classifier 'sources'
-                }
-            }
-        }
-        repositories {
-            maven {
-                credentials {
-                    username 'test'
-                    password 'test'
-                }
-                url 'http://nexus-testsuren.rhcloud.com/nexus/content/repositories/test/'
-            }
-        }
-    }
-
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-}
+
+//dependencies {
+//    testCompile group: 'junit', name: 'junit', version: '4.11'
+//}
