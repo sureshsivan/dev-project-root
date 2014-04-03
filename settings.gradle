@@ -1,6 +1,8 @@
 rootProject.name = 'dev-project-root'
 include 'dev-project-core-shared'
 include 'dev-project-web-shared'
+include 'my-proj-core'
+project(':my-proj-core').projectDir = new File(rootProject.projectDir, "$myProjRootDir/my-proj-core")
 //project(':dev-project-core-shared').version = devProjectCoreSharedVersion
 
 //include 'dev-project-web-shared'

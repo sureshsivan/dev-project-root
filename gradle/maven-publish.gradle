@@ -29,10 +29,10 @@ publishing {
     repositories {
         maven {
             credentials {
-                username 'test'
-                password 'test'
+                username mavenTestRepoUsername
+                password mavenTestRepoPassword
             }
-            url 'http://nexus-testsuren.rhcloud.com/nexus/content/repositories/test/'
+            url mavenTestRepoUrl
         }
     }
 }
