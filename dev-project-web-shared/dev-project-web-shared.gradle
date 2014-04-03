@@ -1,2 +1,5 @@
 version devProjectWebSharedVersion
 description devProjectWebSharedDesc
+dependencies {
+    compile project(":$devProjectCoreSharedName")
+}

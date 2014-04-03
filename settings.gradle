@@ -1,8 +1,8 @@
-rootProject.name = 'dev-project-root'
-include 'dev-project-core-shared'
-include 'dev-project-web-shared'
-include 'my-proj-core'
-project(':my-proj-core').projectDir = new File(rootProject.projectDir, "$myProjRootDir/my-proj-core")
+rootProject.name = rootProjectName
+include devProjectCoreSharedName
+include devProjectWebSharedName
+//include myProjName
+//project(myProjName).projectDir = new File(rootProject.projectDir, "$myProjRootDir")
 //project(':dev-project-core-shared').version = devProjectCoreSharedVersion
 
 //include 'dev-project-web-shared'

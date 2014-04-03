@@ -7,9 +7,9 @@ ext {
 //task platformBuild(dependsOn: [project(':coreProject').build]){
 //    description : "Makes build only for the platform Projects"
 //}
-//https://github.com/hibernate/hibernate-orm/blob/master/build.gradle
+//https://github.com/hibernate/hibernate-orm/blob/master/dev-project-my-proj.gradle
 //https://github.com/hibernate/hibernate-orm/blob/master/settings.gradle
-//https://github.com/spring-projects/spring-framework/blob/master/build.gradle
+//https://github.com/spring-projects/spring-framework/blob/master/dev-project-my-proj.gradle
 //https://github.com/groovy/groovy-core/tree/master/subprojects
 //https://github.com/groovy/groovy-core/tree/master/subprojects
 //https://github.com/gradle/gradle/blob/master/settings.gradle#L55

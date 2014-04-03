@@ -6,23 +6,24 @@ apply plugin: 'maven-publish'
 task sourceJar(type: Jar) {
     from sourceSets.main.allJava
 }
-//task docZip(type: Zip) {
-//    from sourceSets.main.allJava
-//}
+task javadocZip(type: Zip) {
+    from javadoc.destinationDir
+}
 publishing {
     publications {
         maven(MavenPublication) {
             from components.java
             artifact sourceJar {
-                classifier "src"
-                extension "zip"
+                classifier = sourcePackageClassifier
+                extension = sourcePackageExtension
             }
-//            artifact docZip {
-//                classifier "docsss"
-//                extension "zip"
-//            }
+            artifact javadocZip {
+                classifier = javadocPackageClassifier
+                extension = javadocPackageExtension
+            }
             pom.withXml {
                 asNode().appendNode('description', project.description)
+//                asNode().appendNode('')
             }
         }
     }
