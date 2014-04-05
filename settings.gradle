@@ -5,20 +5,8 @@ include myProjCoreName
 project(":$myProjCoreName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjCoreName")
 include myProjModelsName
 project(":$myProjModelsName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjModelsName")
-//include myProjName
-//project(myProjName).projectDir = new File(rootProject.projectDir, "$myProjRootDir")
-//project(':dev-project-core-shared').version = devProjectCoreSharedVersion
-
-//include 'dev-project-web-shared'
-
-//https://github.com/hibernate/hibernate-orm/blob/master/settings.gradle
-//include 'metamodel-generator'
-//project(':metamodel-generator').projectDir = new File(rootProject.projectDir, "tooling/metamodel-generator")
-//project(':metamodel-generator').name = 'hibernate-jpamodelgen'
 
 rootProject.children.each { project ->
-//    String projectDirName = "$project.projectDir"
-    println "${project.name}.gradle"
     project.buildFileName = "${project.name}.gradle"
     assert project.projectDir.isDirectory()
     assert project.buildFile.isFile()
