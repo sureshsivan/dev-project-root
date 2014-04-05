@@ -13,6 +13,7 @@ publishing {
     publications {
         maven(MavenPublication) {
             from components.java
+//            from components.web
             artifact sourceJar {
                 classifier = sourcePackageClassifier
                 extension = sourcePackageExtension

@@ -9,6 +9,8 @@ include myProjDaoName
 project(":$myProjDaoName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjDaoName")
 include myProjServicesName
 project(":$myProjServicesName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjServicesName")
+include myProjWebName
+project(":$myProjWebName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjWebName")
 rootProject.children.each { project ->
     project.buildFileName = "${project.name}.gradle"
     assert project.projectDir.isDirectory()
