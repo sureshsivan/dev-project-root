@@ -2,6 +2,6 @@ version myProjectCoreVersion
 description myProjectCoreDesc
 group = myProjectGroupId
 dependencies {
-    compile project(":$devProjectCoreSharedName")
+//    compile project(":$devProjectCoreSharedName")
     compile project(":$devProjectWebSharedName")
 }

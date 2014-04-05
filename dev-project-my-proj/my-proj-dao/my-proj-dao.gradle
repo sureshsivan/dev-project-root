@@ -2,8 +2,8 @@ version myProjectDaoVersion
 description myProjectDaoDesc
 group = myProjectGroupId
 dependencies {
-    compile project(":$devProjectCoreSharedName")
-    compile project(":$devProjectWebSharedName")
-    compile project(":$myProjCoreName")
+//    compile project(":$devProjectCoreSharedName")
+//    compile project(":$devProjectWebSharedName")
+//    compile project(":$myProjCoreName")
     compile project(":$myProjModelsName")
 }

@@ -2,9 +2,9 @@ version myProjectServicesVersion
 description myProjectServicesDesc
 group = myProjectGroupId
 dependencies {
-    compile project(":$devProjectCoreSharedName")
-    compile project(":$devProjectWebSharedName")
-    compile project(":$myProjCoreName")
-    compile project(":$myProjModelsName")
+//    compile project(":$devProjectCoreSharedName")
+//    compile project(":$devProjectWebSharedName")
+//    compile project(":$myProjCoreName")
+//    compile project(":$myProjModelsName")
     compile project(":$myProjDaoName")
 }

@@ -2,7 +2,7 @@ version myProjectModelsVersion
 description myProjectModelsDesc
 group = myProjectGroupId
 dependencies {
-    compile project(":$devProjectCoreSharedName")
-    compile project(":$devProjectWebSharedName")
+//    compile project(":$devProjectCoreSharedName")
+//    compile project(":$devProjectWebSharedName")
     compile project(":$myProjCoreName")
 }
