@@ -5,7 +5,10 @@ include myProjCoreName
 project(":$myProjCoreName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjCoreName")
 include myProjModelsName
 project(":$myProjModelsName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjModelsName")
-
+include myProjDaoName
+project(":$myProjDaoName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjDaoName")
+include myProjServicesName
+project(":$myProjServicesName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjServicesName")
 rootProject.children.each { project ->
     project.buildFileName = "${project.name}.gradle"
     assert project.projectDir.isDirectory()
