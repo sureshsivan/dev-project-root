@@ -3,17 +3,26 @@
  *
  */
 apply plugin: 'maven-publish'
+//task binJar(type: Jar) {
+//    from components.java
+//}
 task sourceJar(type: Jar) {
     from sourceSets.main.allJava
 }
 task javadocZip(type: Zip) {
     from javadoc.destinationDir
 }
+task sourceWar(type:War) {
+}
 publishing {
     publications {
         maven(MavenPublication) {
             from components.java
 //            from components.web
+//            artifact binJar {
+//                classifier = binPackageClassifier
+//                extension = binPackageExtension
+//            }
             artifact sourceJar {
                 classifier = sourcePackageClassifier
                 extension = sourcePackageExtension
@@ -22,6 +31,13 @@ publishing {
                 classifier = javadocPackageClassifier
                 extension = javadocPackageExtension
             }
+            if(tasks.findByName("war") != null){
+                artifact sourceWar {
+                    classifier = warPackageClassifier
+                    extension = warPackageExtension
+                }
+            }
+
             pom.withXml {
                 asNode().appendNode('description', project.description)
 //                asNode().appendNode('')

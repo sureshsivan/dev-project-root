@@ -1,15 +1,25 @@
 rootProject.name = rootProjectName
 include devProjectCoreSharedName
+project(":$devProjectCoreSharedName").buildFileName = "${devProjectCoreSharedName}.gradle"
+
 include devProjectWebSharedName
+project(":$devProjectWebSharedName").buildFileName = "${devProjectWebSharedName}.gradle"
+
 include myProjName
+project(":$myProjName").buildFileName = "${myProjName}.gradle"
+
 include "$myProjName:$myProjCoreName"
 project(":$myProjName:$myProjCoreName").buildFileName = "${myProjCoreName}.gradle"
+
 include "$myProjName:$myProjModelsName"
 project(":$myProjName:$myProjModelsName").buildFileName = "${myProjModelsName}.gradle"
+
 include "$myProjName:$myProjDaoName"
 project(":$myProjName:$myProjDaoName").buildFileName = "${myProjDaoName}.gradle"
+
 include "$myProjName:$myProjServicesName"
 project(":$myProjName:$myProjServicesName").buildFileName = "${myProjServicesName}.gradle"
+
 include "$myProjName:$myProjWebName"
 project(":$myProjName:$myProjWebName").buildFileName = "${myProjWebName}.gradle"
 
