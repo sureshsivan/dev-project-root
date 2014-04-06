@@ -18,10 +18,20 @@ ext {
 //apply plugin: 'eclipse'
 //apply plugin: 'idea'
 
+init {
+    project(":$myProjName").ext.skipBuild = true
+    project(":$myProjName:$myProjUiName").ext.skipBuild = true
+    project(":$myProjName:$myProjUiName:$myProjUiWebName").ext.skipBuild = true
+    project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.skipBuild = true
+    project(":$myProjName:$myProjUiName:$myProjUiWebName").ext.isSencha = true
+    project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.isSencha = true
+}
+
 version = projectVersion
 subprojects {   eachChildProject ->
     //  No Need to Apply these plugins and other tasks for Parent Projects
-    if(eachChildProject.childProjects.size() == 0){
+    if (! ( (eachChildProject.ext.has("skipBuild")) && (eachChildProject.ext.get("skipBuild") == true) )){
+//    if(eachChildProject.childProjects.size() == 0){
         apply plugin: 'java'
         apply from: "${rootProject.projectDir}/${mavenPublishGradleFileLoc}"
         group = projectGroupId
@@ -41,11 +51,13 @@ subprojects {   eachChildProject ->
         dependencies {
             testCompile group: 'junit', name: 'junit', version: '4.11'
         }
-    } else {
-        println "========================================================="
-//        println (eachChildProject.properties.get("ext").properties)
-//        println (eachChildProject.properties.get("ext").get("skipBuild"))
-        println "SKIPPED \"${eachChildProject.name}\" Since It is a Parent Project"
-        println "========================================================="
+    } else if (! ( (eachChildProject.ext.has("isSencha")) && (eachChildProject.ext.get("isSencha") == true) )){
+        println "======================================================================================================="
+        println "APPLY SENCH BUILD to  \"${eachChildProject.name}\" Since It is Configured as isSencha=true"
+        println "======================================================================================================="
+    } else{
+        println "======================================================================================================="
+        println "SKIPPED \"${eachChildProject.name}\" Since It is Configured as skipBuild=true"
+        println "======================================================================================================="
     }
 }

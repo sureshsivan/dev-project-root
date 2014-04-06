@@ -1,3 +1,4 @@
 version myProjectUiMobileVersion
 description myProjectUiMobileDesc
 group = myProjectGroupId
+project.ext.skipBuild = true

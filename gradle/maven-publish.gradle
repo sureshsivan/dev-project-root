@@ -15,6 +15,9 @@ task javadocZip(type: Zip) {
 task sourceWar(type:War) {
 }
 publishing {
+//    println 'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT'
+//    println "${project.ext.properties}"
+//    println "${project.ext.skipBuild}"
     publications {
         maven(MavenPublication) {
             from components.java

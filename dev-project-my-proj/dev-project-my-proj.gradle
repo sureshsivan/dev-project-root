@@ -1,6 +1,9 @@
 version = myProjectVersion
 group = myProjectGroupId
 description myProjectDescription
+//init {
+//    project.ext.skipBuild = true
+//}
 //project.ext.isParent = true
 //project.ext.skipBuild = true
 
