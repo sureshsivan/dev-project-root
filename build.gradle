@@ -19,24 +19,31 @@ ext {
 //apply plugin: 'idea'
 
 version = projectVersion
-subprojects {
-    apply plugin: 'java'
-    apply from: "${rootProject.projectDir}/${mavenPublishGradleFileLoc}"
-    group = projectGroupId
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        maven {
-            credentials {
-                username mavenTestRepoUsername
-                password mavenTestRepoPassword
+subprojects {   eachProject ->
+    //  No Need to Apply these plugins and other tasks for Parent Projects
+    if(eachProject.childProjects.size() == 0){
+        apply plugin: 'java'
+        apply from: "${rootProject.projectDir}/${mavenPublishGradleFileLoc}"
+        group = projectGroupId
+        repositories {
+            mavenLocal()
+            mavenCentral()
+            maven {
+                credentials {
+                    username mavenTestRepoUsername
+                    password mavenTestRepoPassword
+                }
+                url mavenTestRepoUrl
             }
-            url mavenTestRepoUrl
         }
-    }
-    task buildWithPublish(dependsOn: ['javadoc', 'build', 'publishToMavenLocal', 'publish']){
-    }
-    dependencies {
-        testCompile group: 'junit', name: 'junit', version: '4.11'
+        task buildWithPublish(dependsOn: ['javadoc', 'build', 'publishToMavenLocal', 'publish']){
+        }
+        dependencies {
+            testCompile group: 'junit', name: 'junit', version: '4.11'
+        }
+    } else {
+        println "-----------------------------------------------------"
+        println "SKIPPED \"${project.name}\" Since It is a Parent Project"
+        println "-----------------------------------------------------"
     }
 }

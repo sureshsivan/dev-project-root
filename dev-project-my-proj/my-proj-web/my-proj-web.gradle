@@ -8,5 +8,5 @@ dependencies {
 //    compile project(":$myProjCoreName")
 //    compile project(":$myProjModelsName")
 //    compile project(":$myProjDaoName")
-    compile project(":$myProjServicesName")
+    compile project(":$myProjName:$myProjServicesName")
 }

@@ -4,5 +4,5 @@ group = myProjectGroupId
 dependencies {
 //    compile project(":$devProjectCoreSharedName")
 //    compile project(":$devProjectWebSharedName")
-    compile project(":$myProjCoreName")
+    compile project(":$myProjName:$myProjCoreName")
 }

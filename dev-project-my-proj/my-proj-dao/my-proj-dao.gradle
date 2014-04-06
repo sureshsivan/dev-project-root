@@ -5,5 +5,5 @@ dependencies {
 //    compile project(":$devProjectCoreSharedName")
 //    compile project(":$devProjectWebSharedName")
 //    compile project(":$myProjCoreName")
-    compile project(":$myProjModelsName")
+    compile project(":$myProjName:$myProjModelsName")
 }

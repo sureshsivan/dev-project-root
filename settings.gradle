@@ -1,18 +1,43 @@
 rootProject.name = rootProjectName
 include devProjectCoreSharedName
 include devProjectWebSharedName
-include myProjCoreName
-project(":$myProjCoreName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjCoreName")
-include myProjModelsName
-project(":$myProjModelsName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjModelsName")
-include myProjDaoName
-project(":$myProjDaoName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjDaoName")
-include myProjServicesName
-project(":$myProjServicesName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjServicesName")
-include myProjWebName
-project(":$myProjWebName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjWebName")
-rootProject.children.each { project ->
-    project.buildFileName = "${project.name}.gradle"
-    assert project.projectDir.isDirectory()
-    assert project.buildFile.isFile()
-}
+include myProjName
+include "$myProjName:$myProjCoreName"
+project(":$myProjName:$myProjCoreName").buildFileName = "${myProjCoreName}.gradle"
+include "$myProjName:$myProjModelsName"
+project(":$myProjName:$myProjModelsName").buildFileName = "${myProjModelsName}.gradle"
+include "$myProjName:$myProjDaoName"
+project(":$myProjName:$myProjDaoName").buildFileName = "${myProjDaoName}.gradle"
+include "$myProjName:$myProjServicesName"
+project(":$myProjName:$myProjServicesName").buildFileName = "${myProjServicesName}.gradle"
+include "$myProjName:$myProjWebName"
+project(":$myProjName:$myProjWebName").buildFileName = "${myProjWebName}.gradle"
+
+
+
+//project(":dev-project-my-proj:my-proj-core").isParentProject = true
+//println "##########"
+//println project(":dev-project-my-proj:my-proj-core").projectDir
+//project(":dev-project-my-proj").childProjects.each{ childProj ->
+//    println "@@@@@@@@@@@@@@@@@"
+//    println "${childProj}"
+//}
+//println project(":dev-project-my-proj").status
+
+
+//include myProjCoreName
+//project(":$myProjCoreName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjCoreName")
+//include myProjModelsName
+//project(":$myProjModelsName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjModelsName")
+//include myProjDaoName
+//project(":$myProjDaoName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjDaoName")
+//include myProjServicesName
+//project(":$myProjServicesName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjServicesName")
+//include myProjWebName
+//project(":$myProjWebName").projectDir = new File(rootProject.projectDir, "$myProjRootDir/$myProjWebName")
+//rootProject.children.each { project ->
+//    project.buildFileName = "${project.name}.gradle"
+//    println "${project.buildFileName}"
+//    assert project.projectDir.isDirectory()
+//    assert project.buildFile.isFile()
+//}

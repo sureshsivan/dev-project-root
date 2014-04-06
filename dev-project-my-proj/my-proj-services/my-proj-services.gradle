@@ -6,5 +6,5 @@ dependencies {
 //    compile project(":$devProjectWebSharedName")
 //    compile project(":$myProjCoreName")
 //    compile project(":$myProjModelsName")
-    compile project(":$myProjDaoName")
+    compile project(":$myProjName:$myProjDaoName")
 }
