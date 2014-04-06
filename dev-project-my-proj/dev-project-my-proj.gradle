@@ -1,5 +1,5 @@
 version = myProjectVersion
 group = myProjectGroupId
-project.ext.isParent = true
-project.ext.skipBuild = true
+//project.ext.isParent = true
+//project.ext.skipBuild = true
 
