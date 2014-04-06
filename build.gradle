@@ -19,9 +19,9 @@ ext {
 //apply plugin: 'idea'
 
 version = projectVersion
-subprojects {   eachProject ->
+subprojects {   eachChildProject ->
     //  No Need to Apply these plugins and other tasks for Parent Projects
-    if(eachProject.childProjects.size() == 0){
+    if(eachChildProject.childProjects.size() == 0){
         apply plugin: 'java'
         apply from: "${rootProject.projectDir}/${mavenPublishGradleFileLoc}"
         group = projectGroupId
@@ -43,7 +43,9 @@ subprojects {   eachProject ->
         }
     } else {
         println "========================================================="
-        println "SKIPPED \"${project.name}\" Since It is a Parent Project"
+//        println (eachChildProject.properties.get("ext").properties)
+//        println (eachChildProject.properties.get("ext").get("skipBuild"))
+        println "SKIPPED \"${eachChildProject.name}\" Since It is a Parent Project"
         println "========================================================="
     }
 }
