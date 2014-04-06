@@ -29,6 +29,8 @@ project(":$myProjName:$myProjUiName").buildFileName = "${myProjUiName}.gradle"
 include "$myProjName:$myProjUiName:$myProjUiWebName"
 project(":$myProjName:$myProjUiName:$myProjUiWebName").buildFileName = "${myProjUiWebName}.gradle"
 
+include "$myProjName:$myProjUiName:$myProjUiMobileName"
+project(":$myProjName:$myProjUiName:$myProjUiMobileName").buildFileName = "${myProjUiMobileName}.gradle"
 
 //project(":dev-project-my-proj:my-proj-core").isParentProject = true
 //println "##########"
