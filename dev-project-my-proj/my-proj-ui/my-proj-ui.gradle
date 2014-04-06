@@ -1,0 +1,5 @@
+version = myProjectUiVersion
+group = myProjectGroupId
+//project.ext.isParent = true
+//project.ext.skipBuild = true
+
