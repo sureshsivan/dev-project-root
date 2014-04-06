@@ -23,6 +23,11 @@ project(":$myProjName:$myProjServicesName").buildFileName = "${myProjServicesNam
 include "$myProjName:$myProjWebName"
 project(":$myProjName:$myProjWebName").buildFileName = "${myProjWebName}.gradle"
 
+include "$myProjName:$myProjUiName"
+project(":$myProjName:$myProjUiName").buildFileName = "${myProjUiName}.gradle"
+
+include "$myProjName:$myProjUiName:$myProjUiWebName"
+project(":$myProjName:$myProjUiName:$myProjUiWebName").buildFileName = "${myProjUiWebName}.gradle"
 
 
 //project(":dev-project-my-proj:my-proj-core").isParentProject = true
