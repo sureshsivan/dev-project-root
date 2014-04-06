@@ -36,14 +36,14 @@ subprojects {   eachProject ->
                 url mavenTestRepoUrl
             }
         }
-        task buildWithPublish(dependsOn: ['clean', 'build', 'javadoc', 'publishToMavenLocal', 'publish']){
+        task buildWithPublish(dependsOn: ['javadoc', 'build', 'publishToMavenLocal', 'publish']){
         }
         dependencies {
             testCompile group: 'junit', name: 'junit', version: '4.11'
         }
     } else {
-        println "=========================================================="
+        println "========================================================="
         println "SKIPPED \"${project.name}\" Since It is a Parent Project"
-        println "=========================================================="
+        println "========================================================="
     }
 }
