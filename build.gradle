@@ -25,6 +25,13 @@ init {
     project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.skipBuild = true
     project(":$myProjName:$myProjUiName:$myProjUiWebName").ext.isSencha = true
     project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.isSencha = true
+    if (project.hasProperty('senchaBuildProfile')){
+        project(":$myProjName:$myProjUiName:$myProjUiWebName").ext.senchaBuildProfile = args(senchaBuildProfile)
+        project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.senchaBuildProfile = args(senchaBuildProfile)
+    } else {
+        project(":$myProjName:$myProjUiName:$myProjUiWebName").ext.senchaBuildProfile = defaultSenchaBuildProfile
+        project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.senchaBuildProfile = defaultSenchaBuildProfile
+    }
 }
 
 version = projectVersion
