@@ -60,7 +60,7 @@ subprojects {   eachChildProject ->
         }
     } else if (! ( (eachChildProject.ext.has("isSencha")) && (eachChildProject.ext.get("isSencha") == true) )){
         println "======================================================================================================="
-        println "APPLY SENCH BUILD to  \"${eachChildProject.name}\" Since It is Configured as isSencha=true"
+        println "APPLY SENCHA BUILD to  \"${eachChildProject.name}\" Since It is Configured as isSencha=true"
         println "======================================================================================================="
     } else{
         println "======================================================================================================="
