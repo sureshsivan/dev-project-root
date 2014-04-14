@@ -1,0 +1,25 @@
+//version = myProjectUiVersion
+//group = myProjectGroupId
+//description myProjectUiDesc
+//project.ext.isParent = true
+//project.ext.skipBuild = true
+//https://github.com/frankbolviken/SenchaGradle/blob/master/build.gradle
+//https://github.com/frankbolviken/sencha-plugin-gradle
+ext {
+    isWindows = org.gradle.internal.os.OperatingSystem.current().windows
+}
+function checkSenchaEnv{
+	if( (System.env['SENCHA_CMD_HOME'] != null) && 
+		(System.env['SENCHA_EXTJS_HOME'] != null) && 
+		(System.env['SENCHA_TOUCH_HOME'] != null)    ){
+		println "WWWEE"		
+		logger.error('eeeee')
+	} else {
+		println "NOT OK"
+		logger.error('eeeewaefqafrbre')
+	}
+}
+
+task dd {
+	checkSenchaEnv()
+}
