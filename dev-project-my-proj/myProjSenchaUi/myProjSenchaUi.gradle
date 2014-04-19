@@ -8,18 +8,69 @@
 ext {
     isWindows = org.gradle.internal.os.OperatingSystem.current().windows
 }
-function checkSenchaEnv{
-	if( (System.env['SENCHA_CMD_HOME'] != null) && 
-		(System.env['SENCHA_EXTJS_HOME'] != null) && 
-		(System.env['SENCHA_TOUCH_HOME'] != null)    ){
-		println "WWWEE"		
-		logger.error('eeeee')
-	} else {
-		println "NOT OK"
-		logger.error('eeeewaefqafrbre')
-	}
+//task checkSenchaEnv{
+//    if (System.env['SENCHA_CMD_HOME'] == null){
+//        ant.fail('ERROR : SENCHA_CMD_HOME variable is not set')
+//    } else if (System.env['SENCHA_EXTJS_HOME'] == null){
+//        ant.fail('ERROR : SENCHA_EXTJS_HOME variable is not set')
+//    } else if (System.env['SENCHA_TOUCH_HOME'] == null){
+//        ant.fail('ERROR : SENCHA_TOUCH_HOME variable is not set')
+//    }
+//}
+//def dd(dir){
+//    println 'Deleting..........................'
+//    delete dir
+//}
+
+//task checkSenchaEnv(type:Exec){
+//    if(isWindows) {
+//        commandLine 'cmd', '/c', 'sencha', 'which'
+//    } else {
+//        commandLine 'sencha', 'which'
+//    }
+//}
+//task senchaClean(type:Delete) {
+//    delete './MyProjExtJsUi/build/production'
+//}
+//task senchaBuild(type:org.gradle.api.tasks.Exec) {
+//    workingDir './MyProjExtJsUi'
+//    if(isWindows) {
+//        workingDir './MyProjExtJsUi'
+//        commandLine 'cmd', '/c', 'sencha', 'app', 'build', 'production'
+//    } else {
+//        workingDir './MyProjExtJsUi'
+//        commandLine 'sencha', 'app', 'build', 'production'
+//    }
+//}
+//task fullSenchaBuild() {
+//
+//}
+//fullSenchaBuild.dependsOn senchaBuild
+//senchaBuild.dependsOn checkSenchaEnv
+//senchaBuild.dependsOn senchaClean
+
+
+def checkSenchaEnv(){
+    exec {
+        executable  'sencha'
+        args 'which'
+    }
+}
+def senchaClean() {
+    delete './MyProjExtJsUi/build/production'
+}
+def senchaBuild() {
+    exec {
+        workingDir './MyProjExtJsUi'
+        executable 'sencha'
+        args 'app', 'build', 'production'
+    }
+}
+task fullSenchaBuild() {
+    checkSenchaEnv()
+    senchaClean()
+    senchaBuild()
+
 }
 
-task dd {
-	checkSenchaEnv()
-}
+//fullSenchaBuild.dependsOn senchaClean
