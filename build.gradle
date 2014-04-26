@@ -20,23 +20,38 @@ ext {
 
 init {
     project(":$myProjName").ext.skipBuild = true
-    project(":$myProjName:$myProjUiName").ext.skipBuild = true
-    project(":$myProjName:$myProjUiName:$myProjUiWebName").ext.skipBuild = true
-    project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.skipBuild = true
-    project(":$myProjName:$myProjUiName:$myProjUiWebName").ext.isSencha = true
-    project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.isSencha = true
+    project(":$myProjName:$myProjSenchaUiName").ext.skipBuild = true
+    project(":$myProjName:$myProjSenchaUiName").ext.isSencha = true
     if (project.hasProperty('senchaBuildProfile')){
-        project(":$myProjName:$myProjUiName:$myProjUiWebName").ext.senchaBuildProfile = args(senchaBuildProfile)
-        project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.senchaBuildProfile = args(senchaBuildProfile)
+        project(":$myProjName:$myProjSenchaUiName").ext.senchaBuildProfile = senchaBuildProfile
     } else {
-        project(":$myProjName:$myProjUiName:$myProjUiWebName").ext.senchaBuildProfile = defaultSenchaBuildProfile
-        project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.senchaBuildProfile = defaultSenchaBuildProfile
+        project(":$myProjName:$myProjSenchaUiName").ext.senchaBuildProfile = senchaBuildProfileProduction
     }
+
+//      $myProjUiName has been discarded
+//    project(":$myProjName:$myProjUiName").ext.skipBuild = true
+//    project(":$myProjName:$myProjUiName:$myProjUiWebName").ext.skipBuild = true
+//    project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.skipBuild = true
+//    project(":$myProjName:$myProjUiName:$myProjUiWebName").ext.isSencha = true
+//    project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.isSencha = true
+//    if (project.hasProperty('senchaBuildProfile')){
+//        project(":$myProjName:$myProjUiName:$myProjUiWebName").ext.senchaBuildProfile = args(senchaBuildProfile)
+//        project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.senchaBuildProfile = args(senchaBuildProfile)
+//    } else {
+//        project(":$myProjName:$myProjUiName:$myProjUiWebName").ext.senchaBuildProfile = defaultSenchaBuildProfile
+//        project(":$myProjName:$myProjUiName:$myProjUiMobileName").ext.senchaBuildProfile = defaultSenchaBuildProfile
+//    }
+
+
 }
 
 version = projectVersion
 subprojects {   eachChildProject ->
     //  No Need to Apply these plugins and other tasks for Parent Projects
+    task justBuild(){
+    }
+    task buildWithPublish(){
+    }
     if (! ( (eachChildProject.ext.has("skipBuild")) && (eachChildProject.ext.get("skipBuild") == true) )){
 //    if(eachChildProject.childProjects.size() == 0){
         apply plugin: 'java'
@@ -53,16 +68,14 @@ subprojects {   eachChildProject ->
                 url mavenTestRepoUrl
             }
         }
-        task buildWithPublish(dependsOn: ['javadoc', 'build', 'publishToMavenLocal', 'publish']){
-        }
-        task justBuild(dependsOn: ['build']){
-        }
-        dependencies {
-            testCompile group: 'junit', name: 'junit', version: '4.11'
-        }
-    } else if (! ( (eachChildProject.ext.has("isSencha")) && (eachChildProject.ext.get("isSencha") == true) )){
+
+        justBuild.dependsOn 'build'
+        buildWithPublish.dependsOn 'javadoc', 'build', 'publishToMavenLocal', 'publish'
+    } else if ((eachChildProject.ext.has("isSencha")) && (eachChildProject.ext.get("isSencha") == true)){
         println "======================================================================================================="
         println "APPLY SENCHA BUILD to  \"${eachChildProject.name}\" Since It is Configured as isSencha=true"
+        justBuild.dependsOn 'fullSenchaBuild'
+        buildWithPublish.dependsOn 'javadoc', 'fullSenchaBuild', 'publishToMavenLocal', 'publish'
         println "======================================================================================================="
     } else{
         println "======================================================================================================="

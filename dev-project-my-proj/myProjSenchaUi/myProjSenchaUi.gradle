@@ -50,27 +50,40 @@ ext {
 //senchaBuild.dependsOn senchaClean
 
 
-def checkSenchaEnv(){
-    exec {
-        executable  'sencha'
-        args 'which'
+def checkSenchaCmdEnv(){
+    try {
+        exec {
+            executable 'sencha'
+            args 'which'
+        }
+    } catch (Exception e){
+        logger.error('####################################################################')
+        logger.error('Sencha Command Not Installed in this machine. Terminating build')
+        logger.error('####################################################################')
+        throw e
     }
 }
-def senchaClean() {
-    delete './MyProjExtJsUi/build/production'
+def senchaClean(String projectDir, String buildProfile) {
+    delete './' + projectDir + '/build/' + buildProfile
 }
-def senchaBuild() {
+def senchaBuild(String projectDir, String buildProfile) {
+    logger.info('####################################################################')
+    logger.info('Building Project in Directory \'' + projectDir + '\' with Profile as :' + buildProfile)
+    logger.info('####################################################################')
     exec {
-        workingDir './MyProjExtJsUi'
+        workingDir './' + projectDir
         executable 'sencha'
-        args 'app', 'build', 'production'
+        args 'app', 'build', buildProfile
     }
 }
 task fullSenchaBuild() {
-    checkSenchaEnv()
-    senchaClean()
-    senchaBuild()
-
+    checkSenchaCmdEnv()
+    senchaClean('MyProjExtJsUi', senchaBuildProfile)
+    senchaBuild('MyProjExtJsUi', senchaBuildProfile)
+    senchaClean('MyProjTouchUi', senchaBuildProfile)
+    senchaBuild('MyProjTouchUi', senchaBuildProfile)
 }
+
+//build.dependsOn fullSenchaBuild
 
 //fullSenchaBuild.dependsOn senchaClean
