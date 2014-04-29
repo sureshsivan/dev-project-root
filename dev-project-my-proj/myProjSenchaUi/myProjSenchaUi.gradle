@@ -83,13 +83,13 @@ def senchaBuild(String projectDir, String buildProfile) {
     }
 }
 task fullSenchaBuild() {
-//    checkSenchaCmdEnv()
-//    senchaClean('MyProjExtJsUi', senchaBuildProfile)
-//    senchaBuild('MyProjExtJsUi', senchaBuildProfile)
-//    senchaClean('MyProjTouchUi', senchaBuildProfile)
-//    senchaBuild('MyProjTouchUi', senchaBuildProfile)
+    checkSenchaCmdEnv()
+    senchaClean('MyProjExtJsUi', senchaBuildProfile)
+    senchaBuild('MyProjExtJsUi', senchaBuildProfile)
+    senchaClean('MyProjTouchUi', senchaBuildProfile)
+    senchaBuild('MyProjTouchUi', senchaBuildProfile)
 }
-fullSenchaBuild.dependsOn checkSenchaCmdEnvCommandLine
+//fullSenchaBuild.dependsOn checkSenchaCmdEnvCommandLine
 //build.dependsOn fullSenchaBuild
 
 //fullSenchaBuild.dependsOn senchaClean
