@@ -82,13 +82,27 @@ def senchaBuild(String projectDir, String buildProfile) {
         args 'app', 'build', buildProfile
     }
 }
-task fullSenchaBuild() {
-    checkSenchaCmdEnv()
-    senchaClean('MyProjExtJsUi', senchaBuildProfile)
-    senchaBuild('MyProjExtJsUi', senchaBuildProfile)
-    senchaClean('MyProjTouchUi', senchaBuildProfile)
-    senchaBuild('MyProjTouchUi', senchaBuildProfile)
+def copyProjectFiles(String projectDir, String buildProfile, String desDirName, String destFolderName) {
+    sourceDir  './' + projectDir + '/build/' + destinationDirNAme
+    destinationDir  desDirName + destFolderName
+    copy {
+        from sourceDir
+        into destinationDir
+        include '**/*.html'
+        include '**/*.js'
+    }
 }
+task fullSenchaBuild() {
+//    checkSenchaCmdEnv()
+//    senchaProjectDirs.each { eachProjectDir ->
+//        senchaClean(eachProjectDir, senchaBuildProfile)
+//        senchaBuild(eachProjectDir, senchaBuildProfile)
+//    }
+}
+//task tt(){
+//    copyProjectFiles('MyProjExtJsUi', senchaBuildProfile, project(":$myProjWebName"))
+//}
+
 //fullSenchaBuild.dependsOn checkSenchaCmdEnvCommandLine
 //build.dependsOn fullSenchaBuild
 

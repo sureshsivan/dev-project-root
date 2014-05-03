@@ -10,3 +10,11 @@ dependencies {
 //    compile project(":$myProjDaoName")
     compile project(":$myProjName:$myProjServicesName")
 }
+
+war {
+    project(":$myProjName:$myProjSenchaUiName").ext.senchaProjectDirs.each { eachProjectDir ->
+        from ((project(":$myProjName:$myProjSenchaUiName").projectDir.toString()) + '/' +
+                (eachProjectDir + '/build/' + project(":$myProjName:$myProjSenchaUiName").ext.senchaBuildProfile))
+    }
+
+}

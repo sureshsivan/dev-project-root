@@ -22,6 +22,7 @@ init {
     project(":$myProjName").ext.skipBuild = true
     project(":$myProjName:$myProjSenchaUiName").ext.skipBuild = true
     project(":$myProjName:$myProjSenchaUiName").ext.isSencha = true
+    project(":$myProjName:$myProjSenchaUiName").ext.senchaProjectDirs = ['MyProjExtJsUi', 'MyProjTouchUi']
     if (project.hasProperty('senchaBuildProfile')){
         project(":$myProjName:$myProjSenchaUiName").ext.senchaBuildProfile = senchaBuildProfile
     } else {
@@ -75,7 +76,7 @@ subprojects {   eachChildProject ->
         println "======================================================================================================="
         println "APPLY SENCHA BUILD to  \"${eachChildProject.name}\" Since It is Configured as isSencha=true"
         justBuild.dependsOn 'fullSenchaBuild'
-        buildWithPublish.dependsOn 'javadoc', 'fullSenchaBuild', 'publishToMavenLocal', 'publish'
+        buildWithPublish.dependsOn 'fullSenchaBuild'
         println "======================================================================================================="
     } else{
         println "======================================================================================================="
