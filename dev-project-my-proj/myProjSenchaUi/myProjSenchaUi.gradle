@@ -79,7 +79,7 @@ def senchaBuild(String projectDir, String buildProfile) {
     exec {
         workingDir './' + projectDir
         executable 'sencha'
-        args 'app', 'build', buildProfile
+        args 'app', 'build', '--clean', '--environment', buildProfile//, '--destination', 'ayyo'
     }
 }
 def copyProjectFiles(String projectDir, String buildProfile, String desDirName, String destFolderName) {
@@ -93,11 +93,11 @@ def copyProjectFiles(String projectDir, String buildProfile, String desDirName, 
     }
 }
 task fullSenchaBuild() {
-//    checkSenchaCmdEnv()
-//    senchaProjectDirs.each { eachProjectDir ->
+    checkSenchaCmdEnv()
+    senchaProjectDirs.each { eachProjectDir ->
 //        senchaClean(eachProjectDir, senchaBuildProfile)
-//        senchaBuild(eachProjectDir, senchaBuildProfile)
-//    }
+        senchaBuild(eachProjectDir, senchaBuildProfile)
+    }
 }
 //task tt(){
 //    copyProjectFiles('MyProjExtJsUi', senchaBuildProfile, project(":$myProjWebName"))

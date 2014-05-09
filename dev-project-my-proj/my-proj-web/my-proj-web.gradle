@@ -13,8 +13,11 @@ dependencies {
 
 war {
     project(":$myProjName:$myProjSenchaUiName").ext.senchaProjectDirs.each { eachProjectDir ->
-        from ((project(":$myProjName:$myProjSenchaUiName").projectDir.toString()) + '/' +
-                (eachProjectDir + '/build/' + project(":$myProjName:$myProjSenchaUiName").ext.senchaBuildProfile))
+        println '#########################################################################'
+        println ((project(":$myProjName:$myProjSenchaUiName").projectDir.toString()) + '\\' +
+                (eachProjectDir + '\\build\\' + project(":$myProjName:$myProjSenchaUiName").ext.senchaBuildProfile))
+        from ((project(":$myProjName:$myProjSenchaUiName").projectDir.toString()) + '\\' +
+                (eachProjectDir + '\\build\\' + project(":$myProjName:$myProjSenchaUiName").ext.senchaBuildProfile))
     }
 
 }
